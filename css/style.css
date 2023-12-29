@@ -1,3 +1,11 @@
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+}
+
 main {
   font-family: "Roboto", sans-serif;
   padding: 20px 30px;
@@ -11,6 +19,7 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  line-height: 1.4;
 }
 
 h1 {
@@ -24,7 +33,7 @@ h2 {
 form {
   max-width: 400px;
   width: 100%;
-  margin: 20px auto;
+  margin: 10px auto 0;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -86,7 +95,7 @@ button:hover {
   margin-bottom: 0;
 }
 .response--active {
-  max-height: 400px;
+  max-height: 2000px;
   padding: 10px 20px;
 }
 

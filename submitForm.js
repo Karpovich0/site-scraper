@@ -13,25 +13,29 @@ const DOMAIN_ARRAY = document.querySelectorAll(".domain");
 //show results div
 const RESPONSE_DIV = document.querySelector(".response");
 
-function submitForm() {
+function submitForm(data) {
 	timeStart = timePoint();
-
-	url = document.querySelector("#url").value;
-	element = document.querySelector("#element").value;
+	if (!data) {
+		url = document.querySelector("#url").value.trim();
+		element = document.querySelector("#element").value.trim();
+		data = { url, element };
+	} else {
+	}
+	console.log(data);
 
 	fetch("processRequest.php", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({ url, element }),
+		body: JSON.stringify(data),
 	})
 		.then((response) => response.json())
 		.then((data) => {
 			response = data;
 			console.log(response);
 			if (response.isNotActual) {
-				console.log(response.isActual);
+				sendData();
 			} else {
 				fillResult(response);
 			}
@@ -39,23 +43,6 @@ function submitForm() {
 		.catch((error) => {
 			console.error("Error:", error);
 		});
-
-	// fetch(url)
-	// 	.then((response) => {
-	// 		if (!response.ok) {
-	// 			throw new Error(`HTTP error! Status: ${response.status}`);
-	// 		}
-	// 		return response.text();
-	// 	})
-	// 	.then((responseText) => {
-	// 		const count = findAllOccurrences(responseText, element);
-	// 		let duration = calculateTime();
-	// 		let domain = new URL(url).hostname;
-	// 		sendData({ url, element, count, duration, domain });
-	// 	})
-	// 	.catch((error) => {
-	// 		console.error("Fetch error:", error);
-	// 	});
 }
 
 function findAllOccurrences(mainString, subString) {
@@ -67,6 +54,7 @@ function findAllOccurrences(mainString, subString) {
 		if (index !== -1) occurrences++;
 	} while (index !== -1);
 
+	console.log(occurrences);
 	return occurrences;
 }
 
@@ -108,23 +96,23 @@ function formatDate(date) {
 	return date.replace(/-/g, "/");
 }
 
-function sendData(data) {
-	// Use the Fetch API to make an Ajax request
-	fetch("processRequest.php", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(data),
-	})
-		.then((response) => response.json())
-		.then((data) => {
-			response = data;
-			console.log(response);
-			fillResult(response);
+function sendData() {
+	fetch(url)
+		.then((response) => {
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			}
+			return response.text();
+		})
+		.then((responseText) => {
+			console.log("here");
+			const count = findAllOccurrences(responseText, element);
+			let duration = calculateTime();
+			let domain = new URL(url).hostname;
+			submitForm({ url, element, count, duration, domain });
 		})
 		.catch((error) => {
-			console.error("Error:", error);
+			console.error("Fetch error:", error);
 		});
 }
 

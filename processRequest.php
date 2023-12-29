@@ -9,10 +9,11 @@ if (isset($_POST)) {
 	$is_actual = ReturnIsActual($user["url"], $user["element"]);
 	if ($is_actual) {
 		GetData($user["url"], $user["element"]);
+	} elseif (array_key_exists('domain', $user)) {
+		PutDB($user["url"], $user["element"], $user["count"], $user["duration"], $user["domain"]);
+		GetData($user["url"], $user["element"]);
 	} else {
 		echo json_encode(["isNotActual" => true]);
-		// PutDB($user["url"], $user["element"], $user["count"], $user["duration"], $user["domain"]);
-		// GetData($user["url"], $user["element"]);
 	}
 }
 
