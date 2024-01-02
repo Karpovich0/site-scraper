@@ -1,5 +1,5 @@
 <?php
-//function returns SQL query to get GENERAL statistic
+//function returns SQL query to get GENERAL statistics
 function GetStatistic($domain, $element)
 {
 	$combinedSql = "

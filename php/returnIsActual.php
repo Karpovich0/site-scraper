@@ -1,5 +1,5 @@
 <?php
-//checks if there was a request to this site about this element in recent 5 minutes
+//checks if there has been a request to this site about this element in the last 5 minutes.
 function ReturnIsActual($url, $element)
 {
 	global $connection;

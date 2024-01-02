@@ -1,5 +1,5 @@
 <?php
-//this is a function-helper to get data from db which receives SQL query
+//this is a function helper to retrieve data from a DB that receives an SQL query
 function GetDataFromDB($sql)
 {
 	global $connection;

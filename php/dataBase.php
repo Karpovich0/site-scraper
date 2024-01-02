@@ -7,7 +7,7 @@ $db_user = "root";
 $db_password = "";
 $db_name = "sites";
 $connection;
-// before every request we need to start our connection with our DB
+// before each request, we need to establish a connection with our DB
 function startDB()
 {
 	global $connection, $db_server, $db_user, $db_password, $db_name;
@@ -18,13 +18,13 @@ function startDB()
 		echo "Couldn't connect. Error: " . $e->getMessage();
 	}
 }
-// after every request we need to close our connection with our DB
+// after each request we have to close the connection with our DB.
 function EndDB()
 {
 	global $connection;
 	mysqli_close($connection);
 }
-// put new data in DB
+// add new data to DB
 function PutDB($url, $element, $count, $duration, $domain)
 {
 	global $connection;
@@ -38,7 +38,7 @@ function PutDB($url, $element, $count, $duration, $domain)
 	}
 }
 
-//we use this function to get data from DB via using url + element in SQL query
+//we use this function to retrieve data from DB by using URL + element in SQL query
 function GetData($url, $element)
 {
 	$sql = "SELECT *
