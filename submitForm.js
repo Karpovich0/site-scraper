@@ -111,9 +111,13 @@ function timePoint() {
 function calculateTime() {
 	return timePoint() - timeStart;
 }
-//just to follow the pattern of your example
+//convert UTC to local time
 function formatDate(date) {
-	return date.replace(/-/g, "/");
+	// Convert the UTC date string to a Date object
+	const utcDate = new Date(date + " UTC");
+
+	// Convert UTC date to local date
+	return new Date(utcDate.toLocaleString()).toString();
 }
 
 //use this function when you need to fill all elements of a particular CSS class with the same data
