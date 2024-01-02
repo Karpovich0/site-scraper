@@ -16,22 +16,40 @@
 	<body>
 		<main class="main">
 			<section>
+				<!-- section for form -->
 				<h1>HTML Element Counter</h1>
-				<form id="elementForm" action="">
+				<form id="elementForm" action="" onsubmit="event.preventDefault(); submitForm()">
 					<div class="row">
 						<label for="url">URL:</label>
-						<input type="text" id="url" name="url" required placeholder="https://example.com" />
+						<input
+							type="text"
+							id="url"
+							name="url"
+							required
+							placeholder="https://example.com"
+							minlength="5"
+							pattern="^(https?|ftp):\/\/[^\s\/$.?#].[^\s]*$"
+						/>
 					</div>
 					<div class="row">
 						<label for="element">Element:</label>
-						<input type="text" id="element" name="element" placeholder="img" required />
+						<input
+							type="text"
+							id="element"
+							name="element"
+							placeholder="img"
+							pattern="[A-Za-z0-9]+"
+							required
+							minlength="1"
+						/>
 					</div>
-
-					<button type="button" onclick="submitForm()">Count</button>
+					<button type="submit">Count</button>
+					<!-- END section for form -->
 				</form>
 			</section>
 			<div id="responseArea" class="response">
 				<section>
+					<!-- statistic about current request -->
 					<h2>Statistic</h2>
 					<div class="response__row">
 						URL: <span id="response-url"></span> Fetched on <span id="response-date"></span>, took
@@ -41,8 +59,10 @@
 						Element: &lt;<span class="response-element"></span>&gt; appeared
 						<span id="response-count"></span> time(s) in page
 					</div>
+					<!-- END statistic about current request -->
 				</section>
 				<section>
+					<!-- general statistic -->
 					<h2>General Statistics</h2>
 					<div class="response__row">
 						<span id="appearance-url-count">X</span> different URLs from <span class="domain">X</span> have
@@ -56,6 +76,7 @@
 					elements from <span class="domain">X</span> Total of
 					<span id="total-element-count">X</span> &lt;<span class="response-element"></span>&gt; elements
 					counted in all requests ever made
+					<!-- END general statistic -->
 				</section>
 			</div>
 		</main>
