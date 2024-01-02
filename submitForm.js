@@ -64,16 +64,15 @@ function sendData() {
 		});
 }
 //search for all element's appearances in html
-function findAllOccurrences(mainString, subString) {
-	//mainString - it's a respose's body with all html
-	let occurrences = 0;
-	// by adding the '<' symbol, we limit our search to only tags. However, if we remove the '<' symbol, we can search for any text, not just tags
-	const formatedSubString = "<" + subString;
-	let index = -1;
-	do {
-		index = mainString.indexOf(formatedSubString, index + 1);
-		if (index !== -1) occurrences++;
-	} while (index !== -1);
+function findAllOccurrences(mainString, subString) {	
+
+	const domParser = new DOMParser();
+
+    // Parse the HTML response
+    const dom = domParser.parseFromString(mainString, 'text/html');
+
+    // Find all occurrences of the specified tag
+    const occurrences = dom.getElementsByTagName(subString).length;
 
 	return occurrences;
 }
